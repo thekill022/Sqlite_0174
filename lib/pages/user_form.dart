@@ -26,8 +26,8 @@ class _UserFormPageState extends State<UserFormPage> {
     if (widget.user != null) {
       _nameController.text = widget.user!.name;
       _emailController.text = widget.user!.email;
-      _teleponController.text = widget.user!.email;
-      _alamatController.text = widget.user!.email;
+      _teleponController.text = widget.user!.NoTelepon;
+      _alamatController.text = widget.user!.alamat;
     }
   }
 
@@ -62,8 +62,23 @@ class _UserFormPageState extends State<UserFormPage> {
               decoration: InputDecoration(
                 labelText: "Nomor Telepon",
                 border: OutlineInputBorder(),
+                prefixText: "+62"
               ),
-              inputFormatters: [LibPhonenumberTextFormatter(country:CountryManager().countries.firstWhere((c) => c.countryCode == "ID"))],
+              inputFormatters: [LibPhonenumberTextFormatter(
+                country: CountryWithPhoneCode(
+                  phoneCode: '62',
+                  countryCode: 'ID',
+                  phoneMaskMobileNational: '0000-0000-0000-0000',
+                  exampleNumberMobileNational: '0812345678901234',
+                  exampleNumberFixedLineNational: '02112345678',
+                  phoneMaskFixedLineNational: '00-000-0000',
+                  exampleNumberMobileInternational: '+628123456789',
+                  exampleNumberFixedLineInternational: '+622112345678',
+                  phoneMaskMobileInternational: '+00 000-0000-0000',
+                  phoneMaskFixedLineInternational: '+00 00-000-0000',
+                  countryName: 'Indonesia',
+            ),
+            )],
             ),
             SizedBox(height: 15),
             TextField(

@@ -22,16 +22,17 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final user = state.Users[index];
                 return ListTile(
-                  title: Row(children: [
-                    Text(user.name),
-                    SizedBox(width: 20,),
-                    Text(user.alamat),
+                  title: Row(
+                    children: [
+                    Text(user.name.length > 8 ? "${user.name.substring(0,7)}..." : user.name),
+                    Text(" | "),
+                    Text("+62 ${user.NoTelepon}"),
                   ],),
-                  subtitle: Row(
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(user.email)  ,
-                      SizedBox(width: 20,),
-                      Text(user.NoTelepon)
+                      Text(user.alamat)
                     ],
                   ),
                   trailing: Row(
@@ -45,14 +46,14 @@ class HomePage extends StatelessWidget {
                                 builder: (_) => UserFormPage(user: user),
                               ),
                             ),
-                        icon: Icon(Icons.delete, color: Colors.red),
+                        icon: Icon(Icons.edit, color: Colors.blue),
                       ),
                       IconButton(
                         onPressed:
                             () => context.read<UserBloc>().add(
                               DeleteUserEvent(user.id),
                             ),
-                        icon: Icon(Icons.edit, color: Colors.blue),
+                        icon: Icon(Icons.delete, color: Colors.red),
                       ),
                     ],
                   ),
