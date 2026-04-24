@@ -1,4 +1,20 @@
-part of 'user_bloc.dart';
+import 'package:meet8/domain/entities/user_entity.dart';
 
-@immutable
-sealed class UserEvent {}
+abstract class UserEvent {}
+
+class LoadUsers extends UserEvent {}
+
+class AddUserEvent extends UserEvent {
+  final UserEntity user;
+  AddUserEvent(this.user);
+}
+
+class DeleteUserEvent extends UserEvent {
+  final String id;
+  DeleteUserEvent(this.id);
+}
+
+class UpdateUserEvent extends UserEvent {
+  final UserEntity user;
+  UpdateUserEvent(this.user);
+}
