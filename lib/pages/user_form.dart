@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:meet8/bloc/user_bloc.dart';
 import 'package:meet8/bloc/user_event.dart';
 import 'package:meet8/domain/entities/user_entity.dart';
@@ -62,6 +63,7 @@ class _UserFormPageState extends State<UserFormPage> {
                 labelText: "Nomor Telepon",
                 border: OutlineInputBorder(),
               ),
+              inputFormatters: [LibPhonenumberTextFormatter(country:CountryManager().countries.firstWhere((c) => c.countryCode == "ID"))],
             ),
             SizedBox(height: 15),
             TextField(

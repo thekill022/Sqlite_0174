@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   path: ^1.9.1
   path_provider: ^2.1.5
+  flutter_libphonenumber: ^2.5.1
 
 dev_dependencies:
   flutter_test:
