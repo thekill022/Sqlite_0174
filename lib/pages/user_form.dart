@@ -16,6 +16,8 @@ class UserFormPage extends StatefulWidget {
 class _UserFormPageState extends State<UserFormPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _teleponController = TextEditingController();
+  final _alamatController = TextEditingController();
 
   @override
   void initState() {
@@ -23,6 +25,8 @@ class _UserFormPageState extends State<UserFormPage> {
     if (widget.user != null) {
       _nameController.text = widget.user!.name;
       _emailController.text = widget.user!.email;
+      _teleponController.text = widget.user!.email;
+      _alamatController.text = widget.user!.email;
     }
   }
 
@@ -51,6 +55,22 @@ class _UserFormPageState extends State<UserFormPage> {
                 border: OutlineInputBorder(),
               ),
             ),
+            SizedBox(height: 15),
+            TextField(
+              controller: _teleponController,
+              decoration: InputDecoration(
+                labelText: "Nomor Telepon",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: _alamatController,
+              decoration: InputDecoration(
+                labelText: " Alamat Tinggal",
+                border: OutlineInputBorder(),
+              ),
+            ),
             SizedBox(height: 20),
 
             SizedBox(
@@ -65,6 +85,8 @@ class _UserFormPageState extends State<UserFormPage> {
                             : DateTime.now().microsecondsSinceEpoch.toString(),
                     name: _nameController.text,
                     email: _emailController.text,
+                    NoTelepon: _teleponController.text,
+                    alamat: _alamatController.text
                   );
 
                   if (isEdit) {
