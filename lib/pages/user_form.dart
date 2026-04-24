@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meet8/bloc/user_bloc.dart';
+import 'package:meet8/bloc/user_event.dart';
 import 'package:meet8/domain/entities/user_entity.dart';
 
 class UserFormPage extends StatefulWidget {
@@ -25,11 +28,57 @@ class _UserFormPageState extends State<UserFormPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isEdit = widget.user != null;
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Dashboard"), actions: const []),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(children: []),
+      appBar: AppBar(title: Text(isEdit ? "Edit User" : "Tambah User")),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                labelText: "Nama Lengkap",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                labelText: " Alamat Email",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 20),
+
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  final newUser = UserEntity(
+                    id:
+                        isEdit
+                            ? widget.user!.id
+                            : DateTime.now().microsecondsSinceEpoch.toString(),
+                    name: _nameController.text,
+                    email: _emailController.text,
+                  );
+
+                  if (isEdit) {
+                    context.read<UserBloc>().add(UpdateUserEvent(newUser));
+                  } else {
+                    context.read<UserBloc>().add(AddUserEvent(newUser));
+                  }
+                  Navigator.pop(context);
+                },
+                child: Text(isEdit ? "Simpan Perubahan" : "Simpan User Baru"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
