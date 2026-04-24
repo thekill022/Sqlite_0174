@@ -22,8 +22,18 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final user = state.Users[index];
                 return ListTile(
-                  title: Text(user.name),
-                  subtitle: Text(user.email),
+                  title: Row(children: [
+                    Text(user.name),
+                    SizedBox(width: 20,),
+                    Text(user.alamat),
+                  ],),
+                  subtitle: Row(
+                    children: [
+                      Text(user.email)  ,
+                      SizedBox(width: 20,),
+                      Text(user.NoTelepon)
+                    ],
+                  ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
