@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meet8/bloc/user_event.dart';
 import 'package:meet8/bloc/user_state.dart';
-import 'package:meet8/data/repository/user_repository.dart';
+import 'package:meet8/domain/repository/user_repository.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository repository;
